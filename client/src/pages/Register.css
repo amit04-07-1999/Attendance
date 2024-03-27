@@ -1,0 +1,124 @@
+.container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.regPage {
+  display: flex;
+  justify-content: center;
+  font-family: "Urbanist", sans-serif;
+}
+
+.regPage .reg {
+  margin-top: 282px;
+  margin-left: 9px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.reg {
+  position: absolute;
+  z-index: -1;
+  width: 342px;
+  height: 297px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.SquareImg {
+  width: 360px;
+  height: 573px;
+  top: 224px;
+  gap: 0px;
+  border-radius: 97px 0px 0px 0px;
+  opacity: 0px;
+  position: absolute;
+  z-index: -1;
+}
+
+.welcome {
+  font-family: "Urbanist", sans-serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 25.2px;
+  text-align: center;
+  color: #ffffff;
+  padding-top: 150px;
+}
+
+.form-control-signup {
+  width: 257px;
+  height: 40px;
+  left: 14.5px;
+  gap: 0px;
+  border-radius: 47px;
+  opacity: 0px;
+}
+
+.rounded-circle {
+  width: 40px;
+  height: 40px;
+}
+
+.regPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fake-input {
+  position: relative;
+  border-radius: 50%;
+}
+
+.fake-input input {
+  border: none;
+  background-color: #fff;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Urbanist", sans-serif;
+  color: #898989;
+}
+
+.fake-input img {
+  background-color: #010e4a;
+  position: absolute;
+}
+
+.buttonRegister {
+  background-color: #010e4a;
+  border: #010e4a;
+  width: Hug(272px) px;
+  height: Hug(43px) px;
+  padding: 12px 116px 12px 116px;
+  gap: 10px;
+  border-radius: 33px;
+  opacity: 0px;
+  font-family: "Urbanist", sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 19.2px;
+  text-align: left;
+  color: #ffffff;
+}
+
+.ldesc {
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+  line-height: 18px;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.footer {
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+  line-height: 14.4px;
+  font-size: 12px;
+  color: #ffffff;
+}

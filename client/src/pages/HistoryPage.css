@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.slider {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Urbanist", sans-serif;
+  /* position: sticky; */
+}
+
+i {
+  font-size: 30px;
+}
+
+.PersonName {
+  font-family: "Urbanist", sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 32.4px;
+  text-align: left;
+  color: #172154;
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  gap: 0px;
+  opacity: 0px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #172154;
+  position: sticky;
+  bottom: 0;
+}
