@@ -51,7 +51,7 @@ const Login = () => {
                 <img src='attendanceImage/Group 10.png' className='logo1-1' alt="Logo 1" />
             </div>
             <div className='logoImage-1'>
-                <img className='RectangleImg-1' src='/attendanceImage/Rectangle 1.svg' alt="Rectangle" />
+                <img className='RectangleImg-1' src='/attendanceImage/Rectangle1.svg' alt="Rectangle" />
             </div>
             <h6 className='welcome-1 text-white mt-4'>Welcome !</h6>
             <p className='ldesc-1 my-3'>Login with your Account</p>

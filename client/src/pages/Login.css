@@ -18,7 +18,7 @@
   margin-top: 405px;
   gap: 0px;
   border-radius: 97px 0px 0px 0px;
-  opacity: 0px;
+  /* opacity: 0px; */
   position: absolute;
   z-index: -1;
 }
@@ -38,7 +38,7 @@
   left: 14.5px;
   gap: 0px;
   border-radius: 47px;
-  opacity: 0px;
+  /* opacity: 0px; */
 }
 
 .rounded-circle {
@@ -75,7 +75,7 @@
   padding: 12px 116px 12px 116px;
   gap: 10px;
   border-radius: 33px;
-  opacity: 0px;
+  /* opacity: 0px; */
   font-family: "Urbanist", sans-serif;
   font-size: 16px;
   font-weight: 900;

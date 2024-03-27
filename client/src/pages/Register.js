@@ -56,7 +56,7 @@ const Register = () => {
       </div>
       <div className='regPage'>
         <div className='regPage'>
-          <img className='SquareImg' src='./attendanceImage/Rectangle2reg.svg' alt='' />
+          <img className='SquareImg' src='./attendanceImage/Rectangle2.svg' alt='' />
         </div>
         <h6 className='welcome mt-3'>Welcome !</h6>
         <p className='ldesc my-2'>Create an Account</p>

@@ -30,7 +30,7 @@ i {
   width: 48px;
   height: 48px;
   gap: 0px;
-  opacity: 0px;
+  /* opacity: 0px; */
   cursor: pointer;
   border-radius: 50%;
   background-color: #172154;

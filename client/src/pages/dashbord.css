@@ -52,7 +52,7 @@
   height: 170px;
   margin-top: 200px;
   gap: 0px;
-  opacity: 0px;
+  /* opacity: 0px; */
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(0, 158, 25, 0.47) 0%,
@@ -100,7 +100,7 @@
   margin-top: 180px;
   gap: 10px;
   border-radius: 40px;
-  opacity: 0px;
+  /* opacity: 0px; */
   background: #010e4a;
   color: #ffffff;
 }
@@ -126,5 +126,3 @@ i {
   height: 7vh;
   border-radius: 10px;
 }
-
-
