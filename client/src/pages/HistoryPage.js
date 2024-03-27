@@ -25,7 +25,7 @@ function History() {
   const userId = location.state?.id;
   // console.log(history);
   useEffect(() => {
-    axios.get("http://localhost:3001/api/history?id=" + userId).then(r => {
+    axios.get("https://tech-54ds.onrender.com/api/history?id=" + userId).then(r => {
       const isValid = r.data.valid
       if (isValid) {
         setHistory(r.data.history);
