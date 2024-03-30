@@ -26,12 +26,13 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:3001/api/user/login', form);
+            const response = await axios.post('https://attendance-ox18.onrender.com/api/user/login', form);
             const { token, user } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user)); // Storing user info in localStorage
             alert("Login successful!");
-            window.location.href = "/dashboard";
+
+            // window.location.href = "/dashboard";
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError("Invalid email or password");

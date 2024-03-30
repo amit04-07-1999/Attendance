@@ -30,10 +30,10 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/api/user/signup', form);
+      const response = await axios.post('https://attendance-ox18.onrender.com/api/user/signup', form);
       console.log(response.data);
       alert('Signup successful!');
-      window.location.href = '/';
+      // window.location.href = '/';
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message);
