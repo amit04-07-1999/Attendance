@@ -63,84 +63,137 @@ const CheckInOut = mongoose.model('CheckInOut', checkInOutSchema);
 app.use(bodyParser.json());
 
 // Routes
+// app.post('/api/checkin', async (req, res) => {
+//   const body = req.body;
+//   const { userId } = body;
+  
+
+//   if (!userId) {
+//     return res.status(200).send({ valid: false, message: "order id is required" });
+//   }
+//   const nCheckin = new CheckInOut({
+//     userId: userId,
+//     checkinTime: new Date()
+//   })
+//   try {
+//     const check = await nCheckin.save();
+//     return res.status(200).send({ valid: true, message: "checked in.", check: check })
+//   }
+//   catch (err) {
+//     return res.sendStatus(500);
+//   }
+// });
+
+// app.post('/api/checkout', async (req, res) => {
+//   const { historyId } = req.body;
+//   // console.log(historyId);
+
+//   if (!historyId) {
+//     return res.status(200).send({ valid: false, message: "historyId is required." })
+//   }
+//   try {
+//     const updatedCheck = await CheckInOut.findByIdAndUpdate(historyId, {
+//       checkoutTime: new Date()
+//     }, { new: true });
+//     // console.log(updatedCheck);
+//     if (!updatedCheck) {
+//       return res.status(200).send({ valid: false, message: "History not found" });
+//     }
+//     return res.status(200).send({ valid: true, message: "Checkout.", check: updatedCheck });
+//   } catch (err) {
+//     console.error(err);
+//     return res.sendStatus(500);
+//   }
+// });
+
+
+// app.get('/api/history', async (req, res) => {
+
+//   const usrId = req.query.id;
+//   if (usrId === undefined) {
+//     return res.status(200).send({ valid: false, message: "id is required in query" })
+//   }
+//   const isValidId = mongoose.isValidObjectId(usrId);
+//   if (isValidId === false) {
+//     return res.status(200).send({ valid: false, message: "Invalid id" })
+//   }
+//   try {
+//     const history = await CheckInOut.find({ userId: usrId });
+//     // if (history.length === 0) {
+//     return res.status(200).send({ valid: true, history: history })
+//     // }
+//   } catch (err) {
+//     console.log(err);
+//     return res.sendStatus(500);
+//   }
+//   res.json(history);
+// });
+
+
 app.post('/api/checkin', async (req, res) => {
   const body = req.body;
   const { userId } = body;
-  
 
   if (!userId) {
-    return res.status(200).send({ valid: false, message: "order id is required" });
+    return res.status(400).send({ valid: false, message: "User ID is required" });
   }
+
   const nCheckin = new CheckInOut({
     userId: userId,
     checkinTime: new Date()
-  })
+  });
+
   try {
     const check = await nCheckin.save();
-    return res.status(200).send({ valid: true, message: "checked in.", check: check })
-  }
-  catch (err) {
-    return res.sendStatus(500);
+    return res.status(201).send({ valid: true, message: "Checked in.", check: check });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send({ valid: false, message: "Internal Server Error" });
   }
 });
 
 app.post('/api/checkout', async (req, res) => {
   const { historyId } = req.body;
-  // console.log(historyId);
 
   if (!historyId) {
-    return res.status(200).send({ valid: false, message: "historyId is required." })
+    return res.status(400).send({ valid: false, message: "History ID is required" });
   }
+
   try {
     const updatedCheck = await CheckInOut.findByIdAndUpdate(historyId, {
       checkoutTime: new Date()
     }, { new: true });
-    // console.log(updatedCheck);
+
     if (!updatedCheck) {
-      return res.status(200).send({ valid: false, message: "History not found" });
+      return res.status(404).send({ valid: false, message: "History not found" });
     }
-    return res.status(200).send({ valid: true, message: "Checkout.", check: updatedCheck });
+
+    return res.status(200).send({ valid: true, message: "Checked out.", check: updatedCheck });
   } catch (err) {
     console.error(err);
-    return res.sendStatus(500);
+    return res.status(500).send({ valid: false, message: "Internal Server Error" });
   }
 });
-
 
 app.get('/api/history', async (req, res) => {
-
   const usrId = req.query.id;
-  if (usrId === undefined) {
-    return res.status(200).send({ valid: false, message: "id is required in query" })
+
+  if (!usrId) {
+    return res.status(400).send({ valid: false, message: "User ID is required in query" });
   }
-  const isValidId = mongoose.isValidObjectId(usrId);
-  if (isValidId === false) {
-    return res.status(200).send({ valid: false, message: "Invalid id" })
+
+  if (!mongoose.isValidObjectId(usrId)) {
+    return res.status(400).send({ valid: false, message: "Invalid user ID" });
   }
+
   try {
     const history = await CheckInOut.find({ userId: usrId });
-    // if (history.length === 0) {
-    return res.status(200).send({ valid: true, history: history })
-    // }
+    return res.status(200).send({ valid: true, history: history });
   } catch (err) {
-    console.log(err);
-    return res.sendStatus(500);
+    console.error(err);
+    return res.status(500).send({ valid: false, message: "Internal Server Error" });
   }
-  res.json(history);
 });
-
-
-// app.get('/api', (req, res) => {
-//     const userIp = req.userIp;
-//     res.send(`Your IP address is: ${userIp}`);
-// });
-
-
-
-
-
-
-
 
 
 // Start the server
