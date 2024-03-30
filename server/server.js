@@ -31,15 +31,15 @@ function getWiFiIpAddress() {
 
 app.use((req, res, next) => {
   const companyIp = "110.235.232.114";
-  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const firstIp = ip.split(',')[0].trim();
   const wifiIp = getWiFiIpAddress();
 
-  req.userIp = { clientIp, wifiIp };
-
-  if (companyIp !== wifiIp) {
+  if (companyIp !== firstIp && companyIp !== wifiIp) {
     return res.status(200).send({ valid: false, message: "Invalid IP" });
   }
 
+  req.userIp = { clientIp: firstIp, wifiIp };
   next();
 });
 
