@@ -15,11 +15,11 @@ app.use((req, res, next) => {
   const companyIp = "106.221.232.135";
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   req.userIp = ip;
-  if (companyIp !== ip) {
-    return res.status(200).send({ valid: false, message: "Invalid IP" })
-  } else {
+  // if (companyIp !== ip) {
+  //   return res.status(200).send({ valid: false, message: "Invalid IP" })
+  // } else {
     next();
-  }
+  // }
 });
 
 // MongoDB setup
