@@ -12,14 +12,18 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  const companyIp = "106.221.232.135";
+  const companyIp = "110.235.232.114";
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const firstIp = ip.split(',')[0].trim();
+
+  // console.log(firstIp);
   req.userIp = ip;
-  // if (companyIp !== ip) {
-  //   return res.status(200).send({ valid: false, message: "Invalid IP" })
-  // } else {
+  alert(firstIp, companyIp)
+  if (companyIp !== firstIp) {
+    return res.status(200).send({ valid: false, message: "Invalid IP" })
+  } else {
     next();
-  // }
+  }
 });
 
 // MongoDB setup
