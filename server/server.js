@@ -14,18 +14,20 @@ app.use(bodyParser.json());
 
 
 app.use((req, res, next) => {
-    const companyIp = "110.235.232.114";
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const firstIp = ip.split(',')[0].trim();
+  const companyIp = "110.235.232.114";
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const firstIp = ip.split(',')[0].trim();
 
-    console.log(firstIp, companyIp);
-
-    if (companyIp !== firstIp) {
-        return res.status(403).send({ valid: false, message: "Invalid IP" });
-    } else {
-        next();
-    }
+  // Check if the IP matches the company IP
+  if (companyIp !== firstIp) {
+    return res.status(200).send({ valid: false, message: "Invalid IP" });
+  } else {
+    req.userIp = firstIp;
+    next();
+  }
 });
+
+
 
 // MongoDB setup
 const url = process.env.MONGODB_URI;
