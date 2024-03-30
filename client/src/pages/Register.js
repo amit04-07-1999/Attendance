@@ -30,7 +30,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('https://tech-54ds.onrender.com/api/user/signup', form);
+      const response = await axios.post('http://localhost:3001/api/user/signup', form);
       console.log(response.data);
       alert('Signup successful!');
       window.location.href = '/';

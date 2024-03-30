@@ -30,14 +30,16 @@ exports.signupUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-
+  const ip = req.socket.remoteAddress
+  const tip = req.connection.remoteAddress;
+  // console.log(tip);
   try {
     const user = await User.findOne({ email });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '28d' });
-        res.json({ token, user });
+        res.json({ token, user, ip, tip });
       } else {
         res.status(401).json('Incorrect email or password');
       }

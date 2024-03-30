@@ -43,7 +43,7 @@ const CheckInOutPage = () => {
     const currentTime = new Date();
     setCheckInTime(currentTime.toLocaleTimeString());
     try {
-      const res = await axios.post("https://tech-54ds.onrender.com/api/checkin", {
+      const res = await axios.post("http://localhost:3001/api/checkin", {
         userId: userId,
         timestamp: currentTime
       });
@@ -64,7 +64,7 @@ const CheckInOutPage = () => {
     setCheckOutTime(currentTime.toLocaleTimeString());
     try {
       console.log(historyId);
-      const response = await axios.post("https://tech-54ds.onrender.com/api/checkout", {
+      const response = await axios.post("http://localhost:3001/api/checkout", {
         historyId: historyId,
         timestamp: currentTime
       });
