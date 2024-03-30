@@ -66,6 +66,7 @@ app.use(bodyParser.json());
 app.post('/api/checkin', async (req, res) => {
   const body = req.body;
   const { userId } = body;
+  const userIp = req.userIp;
 
   if (!userId) {
     return res.status(200).send({ valid: false, message: "order id is required" });
@@ -86,6 +87,8 @@ app.post('/api/checkin', async (req, res) => {
 app.post('/api/checkout', async (req, res) => {
   const { historyId } = req.body;
   // console.log(historyId);
+  const userIp = req.userIp;
+
 
   if (!historyId) {
     return res.status(200).send({ valid: false, message: "historyId is required." })
