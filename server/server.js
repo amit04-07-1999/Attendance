@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 
   // Check if the IP matches the company IP
   if (companyIp !== firstIp) {
-    return res.status(200).send({ valid: false, message: "Invalid IP" });
+    return res.status(200).send({ valid: false, message: "Invalid IP", firstIp , companyIp});
   } else {
     req.userIp = firstIp;
     next();
