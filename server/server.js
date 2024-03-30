@@ -17,13 +17,13 @@ app.use((req, res, next) => {
   const firstIp = ip.split(',')[0].trim();
 
   // console.log(firstIp);
-  req.userIp = ip;
   alert(firstIp, companyIp)
   if (companyIp !== firstIp) {
     return res.status(200).send({ valid: false, message: "Invalid IP" })
   } else {
     next();
   }
+  req.userIp = ip;
 });
 
 // MongoDB setup
