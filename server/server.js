@@ -16,14 +16,15 @@ app.use((req, res, next) => {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const firstIp = ip.split(',')[0].trim();
 
-  // console.log(firstIp);
-  alert(firstIp, companyIp)
+  console.log("Client IP:", firstIp);
+  console.log("Company IP:", companyIp);
+
   if (companyIp !== firstIp) {
-    return res.status(200).send({ valid: false, message: "Invalid IP" })
+    return res.status(200).send({ valid: false, message: "Invalid IP" });
   } else {
+    req.userIp = ip; // Move this line here to ensure it's executed regardless of the condition
     next();
   }
-  req.userIp = ip;
 });
 
 // MongoDB setup
