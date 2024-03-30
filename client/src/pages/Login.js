@@ -32,7 +32,7 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(user)); // Storing user info in localStorage
             alert("Login successful!");
 
-            // window.location.href = "/dashboard";
+            window.location.href = "/dashboard";
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError("Invalid email or password");
