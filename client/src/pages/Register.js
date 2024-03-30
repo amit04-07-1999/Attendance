@@ -30,7 +30,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('https://attendance-ox18.onrender.com/api/user/signup', form);
+      const response = await axios.post('https://attendance-9ifj.onrender.com/api/user/signup', form);
       console.log(response.data);
       alert('Signup successful!');
       // window.location.href = '/';
