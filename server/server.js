@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const os = require('os');
+
 
 // Load environment variables from .env file
 dotenv.config();
@@ -11,21 +13,52 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
+
+
+function getWiFiIpAddress() {
+  const interfaces = os.networkInterfaces();
+  for (const interfaceName in interfaces) {
+    const interfaceInfo = interfaces[interfaceName];
+    for (const iface of interfaceInfo) {
+      if (iface.family === 'IPv4' && iface.internal === false && interfaceName.startsWith('wlan')) {
+        return iface.address;
+      }
+    }
+  }
+  return null; // Return null if Wi-Fi interface not found
+}
+
 app.use((req, res, next) => {
   const companyIp = "110.235.232.114";
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  const firstIp = ip.split(',')[0].trim();
+  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const wifiIp = getWiFiIpAddress();
 
-  console.log("Client IP:", firstIp);
-  console.log("Company IP:", companyIp);
+  req.userIp = { clientIp, wifiIp };
 
-  if (companyIp !== firstIp) {
+  if (companyIp !== clientIp && companyIp !== wifiIp) {
     return res.status(200).send({ valid: false, message: "Invalid IP" });
-  } else {
-    req.userIp = ip; // Move this line here to ensure it's executed regardless of the condition
-    next();
   }
+
+  next();
 });
+
+
+
+// app.use((req, res, next) => {
+//   const companyIp = "110.235.232.114";
+//   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+//   const firstIp = ip.split(',')[0].trim();
+
+//   // console.log(firstIp);
+//   req.userIp = ip;
+//   alert(firstIp, companyIp)
+//   if (companyIp !== firstIp) {
+//     return res.status(200).send({ valid: false, message: "Invalid IP" })
+//   } else {
+//     next();
+//   }
+// });
 
 // MongoDB setup
 const url = process.env.MONGODB_URI;
