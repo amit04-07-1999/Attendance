@@ -28,18 +28,22 @@ exports.signupUser = async (req, res) => {
   }
 };
 
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res,next) => {
   const { email, password } = req.body;
-  const ip = req.socket.remoteAddress
-  const tip = req.connection.remoteAddress;
-  // console.log(tip);
+  const userIp = req.userIp;
+
+  // console.log('Headers:', req.headers);
+  //   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  //   console.log('IP:', ip);
+  //   req.userIp = ip;
+  //   next();
   try {
     const user = await User.findOne({ email });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '28d' });
-        res.json({ token, user, ip, tip });
+        res.json({ token, user, userIp });
       } else {
         res.status(401).json('Incorrect email or password');
       }

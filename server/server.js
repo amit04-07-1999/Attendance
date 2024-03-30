@@ -11,6 +11,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  req.userIp = ip;
+  next();
+});
+
 // MongoDB setup
 const url = process.env.MONGODB_URI;
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -109,6 +115,14 @@ app.get('/api/history', async (req, res) => {
   }
   res.json(history);
 });
+
+
+// app.get('/api', (req, res) => {
+//     const userIp = req.userIp;
+//     res.send(`Your IP address is: ${userIp}`);
+// });
+
+
 
 
 
