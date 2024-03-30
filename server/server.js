@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 
   req.userIp = { clientIp, wifiIp };
 
-  if (companyIp !== clientIp && companyIp !== wifiIp) {
+  if (companyIp !== wifiIp) {
     return res.status(200).send({ valid: false, message: "Invalid IP" });
   }
 
