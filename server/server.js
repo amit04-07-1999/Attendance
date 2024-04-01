@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 
 app.use((req, res, next) => {
-  const companyIp = "110.235.232.114";
+  const companyIp = "110.235.232.104";
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   const firstIp = ip.split(',')[0].trim();
 
