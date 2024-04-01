@@ -39,12 +39,14 @@ const Login = () => {
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setError("Invalid email or password");
-      } else if (
-        error.response &&
-        error.response.data === "IP address does not match"
-      ) {
-        setError("IP address does not match");
-      } else {
+      } 
+    //   else if (
+    //     error.response &&
+    //     error.response.data === "IP address does not match"
+    //   ) {
+    //     setError("IP address does not match");
+    //   } 
+      else {
         setError("An error occurred. Please try again later.");
         console.error(error);
       }

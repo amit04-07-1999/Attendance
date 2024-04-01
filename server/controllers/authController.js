@@ -28,42 +28,14 @@ exports.signupUser = async (req, res) => {
   }
 };
 
-// exports.loginUser = async (req, res,next) => {
-//   const { email, password } = req.body;
-//   const userIp = req.userIp;
-
-//   try {
-//     const user = await User.findOne({ email });
-    
-//     if (user) {
-//       const match = await bcrypt.compare(password, user.password);
-//       if (match) {
-//         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '28d' });
-//         res.json({ token, user, userIp });
-//       } else {
-//         res.status(401).json('Incorrect email or password');
-//       }
-//     } else {
-//       res.status(401).json('User not found');
-//     }
-//   } catch (error) {
-//     res.status(400).json('Error: ' + error.message);
-//   }
-// };
-
-
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = async (req, res,next) => {
   const { email, password } = req.body;
   const userIp = req.userIp;
 
   try {
     const user = await User.findOne({ email });
+    
     if (user) {
-      // Check if the IP address matches
-      if (user.ipAddress !== userIp) {
-        throw new Error('IP address does not match');
-      }
-      
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '28d' });
@@ -78,6 +50,8 @@ exports.loginUser = async (req, res, next) => {
     res.status(400).json('Error: ' + error.message);
   }
 };
+
+
 
 
 
